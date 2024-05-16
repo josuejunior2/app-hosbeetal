@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use App\Http\Requests\PacienteRequest;
+use Illuminate\Support\Carbon;
 
 class PacienteController extends Controller
 {
@@ -12,7 +14,9 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes = Paciente::all();
+
+        return view('paciente.index', ['pacientes' => $pacientes]);
     }
 
     /**
@@ -20,15 +24,19 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('paciente.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PacienteRequest $request)
     {
-        //
+        $dado = $request->validated();
+        $dado['data_nascimento'] = Carbon::createFromFormat('d/m/Y', $request->input('data_nascimento'))->format('Y-m-d');
+        $paciente = Paciente::create($dado);
+
+        return redirect()->route('paciente.show', ['paciente' => $paciente]);
     }
 
     /**
@@ -36,7 +44,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
+        dd($paciente);
     }
 
     /**
