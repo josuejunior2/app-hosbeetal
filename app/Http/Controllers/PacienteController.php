@@ -44,7 +44,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        dd($paciente);
+        return view('paciente.show', ['paciente' => $paciente]);
     }
 
     /**
@@ -52,15 +52,19 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        //
+        return view('paciente.edit', ['paciente' => $paciente]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(PacienteRequest $request, Paciente $paciente)
     {
-        //
+        $dado = $request->validated();
+        $dado['data_nascimento'] = Carbon::createFromFormat('d/m/Y', $request->input('data_nascimento'))->format('Y-m-d');
+        $paciente->update($dado);
+
+        return redirect()->route('paciente.show', ['paciente' => $paciente]);
     }
 
     /**
@@ -68,6 +72,8 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-        //
+        $paciente->delete();
+
+        return redirect()->route('paciente.index');
     }
 }
