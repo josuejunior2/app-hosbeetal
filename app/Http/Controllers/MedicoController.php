@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medico;
 use Illuminate\Http\Request;
+use App\Http\Requests\MedicoRequest;
 
 class MedicoController extends Controller
 {
@@ -12,7 +13,9 @@ class MedicoController extends Controller
      */
     public function index()
     {
-        //
+        $medicos = Medico::all();
+
+        return view('medico.index', ['medicos' => $medicos]);
     }
 
     /**
@@ -20,15 +23,28 @@ class MedicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('medico.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MedicoRequest $request)
     {
-        //
+        $CRM = 'CRM/'.$request->safe()['UF']. ' ' .$request->safe()['numero_crm'];
+
+        try{
+            $medico = Medico::create([
+                'nome' => $request->safe()['nome'],
+                'crm' => $CRM,
+                'especialidade' => $request->safe()['especialidade']
+            ]);
+        } catch(\Exception $e){
+            return redirect()->back()->with(['error' => 'Já existe um médico cadastrado com esse CRM ou erro no cadastro, revise os dados e tente novamente.']);
+        }
+
+        return redirect()->route('medico.show', ['medico' => $medico]);
+
     }
 
     /**
@@ -36,7 +52,7 @@ class MedicoController extends Controller
      */
     public function show(Medico $medico)
     {
-        //
+        return view('medico.show', ['medico' => $medico]);
     }
 
     /**
@@ -44,15 +60,27 @@ class MedicoController extends Controller
      */
     public function edit(Medico $medico)
     {
-        //
+        return view('medico.edit', ['medico' => $medico]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Medico $medico)
+    public function update(MedicoRequest $request, Medico $medico)
     {
-        //
+        $CRM = 'CRM/'.$request->safe()['UF']. ' ' .$request->safe()['numero_crm'];
+
+        try{
+            $medico->update([
+                'nome' => $request->safe()['nome'],
+                'crm' => $CRM,
+                'especialidade' => $request->safe()['especialidade']
+            ]);
+        } catch(\Exception $e){
+            return redirect()->back()->with(['error' => 'Já existe um médico cadastrado com esse CRM ou erro no cadastro, revise os dados e tente novamente.']);
+        }
+        
+        return redirect()->route('medico.show', ['medico' => $medico]);
     }
 
     /**
@@ -60,6 +88,9 @@ class MedicoController extends Controller
      */
     public function destroy(Medico $medico)
     {
-        //
+        $medico->delete();
+
+        return redirect()->route('medico.index');
+
     }
 }
