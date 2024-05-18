@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         Schema::create('atendimentos', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->date('data_atendimento')->required();
             $table->uuid('medico_id');
             $table->foreign('medico_id')->references('id')->on('medicos');
