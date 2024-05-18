@@ -65,14 +65,6 @@
                                     <div class="datagrid-content">{{ \Carbon\Carbon::parse($atendimento->data_atendimento)->format('d/m/Y') }}</div>
                                 </div>
                                 <div class="datagrid-item">
-                                    <div class="datagrid-title">Nome do Médico</div>
-                                    <div class="datagrid-content">{{ $atendimento->Medico->nome }}</div>
-                                </div>
-                                <div class="datagrid-item">
-                                    <div class="datagrid-title">Especialidade do Médico</div>
-                                    <div class="datagrid-content">{{ $atendimento->Medico->especialidade }}</div>
-                                </div>
-                                <div class="datagrid-item">
                                     <div class="datagrid-title">Nome do paciente</div>
                                     <div class="datagrid-content">{{ $atendimento->Paciente->nome }}</div>
                                 </div>
