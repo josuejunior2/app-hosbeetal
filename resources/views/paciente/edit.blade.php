@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label class="col-form-label required">Nome</label>
                     <div class="col">
-                        <input type="text" class="form-control" name="nome" id="nome" value="{{ $paciente->nome ?? old('nome', '') }}">
+                        <input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome', $paciente->nome) }}">
                         <span class="{{ $errors->has('nome') ? 'text-danger' : '' }}">
                             {{ $errors->has('nome') ? $errors->first('nome') : '' }}
                         </span>
@@ -31,7 +31,7 @@
                 <div class="mb-3">
                     <label class="col-form-label required">E-mail</label>
                     <div class="col">
-                        <input type="text" class="form-control" name="email" id="email" value="{{ $paciente->email ?? old('email', '') }}">
+                        <input type="text" class="form-control" name="email" id="email" value="{{ old('email', $paciente->email) }}">
                         <span class="{{ $errors->has('email') ? 'text-danger' : '' }}">
                             {{ $errors->has('email') ? $errors->first('email') : '' }}
                         </span>
@@ -44,7 +44,7 @@
                 <div class="mb-3">
                     <label class="col-form-label required">Cadastro de Pessoa Física (CPF)</label>
                     <div class="col">
-                        <input type="text" name="cpf" id="cpf" class="form-control" value="{{ $paciente->cpf ?? old('cpf', '') }}" data-mask="000.000.000-00" data-mask-visible="true" placeholder="000.000.000-00" autocomplete="off"/>
+                        <input type="text" name="cpf" id="cpf" class="form-control" value="{{ old('cpf', $paciente->cpf) }}" data-mask="000.000.000-00" data-mask-visible="true" placeholder="000.000.000-00" autocomplete="off"/>
                         <span class="{{ $errors->has('cpf') ? 'text-danger' : '' }}">
                             {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
                         </span>
@@ -55,13 +55,10 @@
                 <div class="mb-3">
                     <label class="col-form-label required">Data de Nascimento</label>
                     <div class="col">
-                        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control" value="{{ \Carbon\Carbon::parse($paciente->data_nascimento)->format('d/m/Y') }}" autocomplete="off" readonly/> {{-- value="{{ old('data_nascimento', '') }}" --}}
+                        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control" value="{{ old('data_nascimento', \Carbon\Carbon::parse($paciente->data_nascimento)->format('d/m/Y')) }}" autocomplete="off" readonly/> {{-- value="{{ old('data_nascimento', '') }}" --}}
                         <span class="{{ $errors->has('data_nascimento') ? 'text-danger' : '' }}">
                             {{ $errors->has('data_nascimento') ? $errors->first('data_nascimento') : '' }}
                         </span>
-                    </div>
-                    <div class="col">
-                        <p id="resultado_data"></p>
                     </div>
                 </div>
             </div>
