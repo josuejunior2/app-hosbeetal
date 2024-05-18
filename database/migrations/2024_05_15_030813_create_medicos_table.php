@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('medicos', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nome', 60)->required();
-            $table->string('crm', 13)->required();
+            $table->string('crm', 13)->required()->unique();
             $table->string('especialidade', 60)->required();
             $table->timestamps();
         });

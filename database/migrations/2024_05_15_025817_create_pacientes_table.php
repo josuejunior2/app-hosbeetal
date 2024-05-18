@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nome', 60)->required();
-            $table->string('cpf', 14)->required();
+            $table->string('cpf', 14)->required()->unique();
             $table->date('data_nascimento')->required()->format('d/m/Y');
             $table->string('email', 60)->required();
             $table->timestamps();
