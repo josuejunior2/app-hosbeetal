@@ -15,6 +15,7 @@ class MedicoController extends Controller
     {
         $medicos = Medico::all();
 
+
         return view('medico.index', ['medicos' => $medicos]);
     }
 
@@ -79,7 +80,7 @@ class MedicoController extends Controller
         } catch(\Exception $e){
             return redirect()->back()->with(['error' => 'Já existe um médico cadastrado com esse CRM ou erro no cadastro, revise os dados e tente novamente.']);
         }
-        
+
         return redirect()->route('medico.show', ['medico' => $medico]);
     }
 

@@ -11,4 +11,8 @@ class Medico extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = ['id', 'nome', 'crm', 'especialidade'];
+
+    public function atendimentos(){
+        return $this->hasMany('App\Models\Atendimento');
+    }
 }
