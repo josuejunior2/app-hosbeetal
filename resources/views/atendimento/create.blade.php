@@ -32,7 +32,7 @@
         </div>
         <div class="row g-3 mb-4">
             <div class="mb-3">
-                <label class="col-3 col-form-label required">Medico</label>
+                <label class="col-3 col-form-label required">Médico</label>
                 <div class="col">
                     <select class="form-select" type="text" name="medico_id" id="medico_id">
                         <option></option>

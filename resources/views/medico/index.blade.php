@@ -8,7 +8,7 @@
             <h3 class="card-title">Lista de medicos</h3>
             <div>
                 <a href="{{ route('medico.create') }}" class="btn btn-success w-100">
-                    Adicionar novo medico
+                    Adicionar novo Médico
                 </a>
             </div>
         </div>
